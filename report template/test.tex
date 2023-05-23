@@ -1,0 +1,17 @@
+\section*{Overview}
+
+We are required to fit the MF96 tyre model coefficients on a data-set of measured tyre forces for a  F-SAE tyre.
+The data-set is provided by the Calspan Tire Research Facility (TIRF). The tyre chosen in our case was the Hoosier 18.0 x 6.0 - 10 R25B.
+The reference frame used in the data-set is the ISO reference frame.
+
+\section*{Pure Lateral Force}
+
+We need to fit the pure condition parameters using the nominal load of $F_z = F_{z\text{\:nom}} = 220$[N] and zeros camber.
+
+Doing this using the Matlab \verb|fmincon| function we obtain the following plot:
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.40]{Figures/01_PURE_LATERAL.eps}
+    \caption{Fit pure lateral force $F_{y0}$ with $F_z=F_{znom}= 220$N, $\gamma=0$ , $\kappa=0$}
+\end{figure}
