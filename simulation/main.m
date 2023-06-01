@@ -20,6 +20,7 @@ tau_delta    = vehicle_data.steering_system.tau_D;
 R0           = vehicle_data.tyre_data_f.R0;
 %%
 bus_fun;
+%%
 AFS = AFS_data();
 %% controller parameter
 m = vehicle_data.vehicle.m;
