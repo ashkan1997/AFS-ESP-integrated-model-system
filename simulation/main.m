@@ -18,16 +18,18 @@ vehicle_data = getVehicleDataStruct();
 L            = vehicle_data.vehicle.L;
 tau_delta    = vehicle_data.steering_system.tau_D;
 R0           = vehicle_data.tyre_data_f.R0;
-
+%%
+bus_fun;
+AFS = AFS_data();
 %% controller parameter
-
-% here is some simplified parameters :)
 m = vehicle_data.vehicle.m;
 a = vehicle_data.vehicle.Lf;
 b = vehicle_data.vehicle.Lr;
 izz = vehicle_data.vehicle.i_zz;
 g = vehicle_data.vehicle.g;
-L = vehicle_data.vehicle.L;
-mu = ;  % --> should come from scenario
-Car = ;
-Caf = ;
+
+mu = 0.2;  % --> should come from scenario
+Caf = vehicle_data.front_suspension.Ks_f ;
+Car = vehicle_data.rear_suspension.Ks_r;
+
+
