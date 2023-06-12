@@ -10,6 +10,7 @@ open_simulink_model;
 %% Load vehicle data
 %------------------------------------------------------------------------------
 
+
 % test_tyre_model; % some plot to visualize the curvers resulting from the
                    % loaded data
 
