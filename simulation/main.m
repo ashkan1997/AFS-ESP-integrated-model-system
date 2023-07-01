@@ -5,16 +5,21 @@
 initialize_environment;
 
 %% Open Simulink model
-% open_simulink_model;
+open_simulink_model;
 
 
 %% Input data
-input.str.amp           = 1;
-input.str.freq          = 1;
-input.str.sample_time   = 0;
-input.intvel            = 7;
-input.mu                = 0.9;
 
+% V0 for high friction is 27.7 m/s
+% and for low friction is 14 m/s
+V0 = 27.0;               % Initial velocity    [m/s]
+
+
+% [scenario_name , input] = scenario1(V0);        % Sine wave with High friction
+% [scenario_name , input] = scenario2(V0);        % Sine wave with low friction
+[scenario_name , input] = scenario3(V0);        % Step wave with High friction
+% [scenario_name , input] = scenario4(V0);        % Step wave with low friction
+    
 Tf = 30;
 
 %% Load vehicle data
@@ -33,7 +38,7 @@ R0           = vehicle_data.tyre_data_f.R0;
 bus_fun;
 %%
 % AFS = AFS_data();
-vehicle_data.AFS = AFS_data();
+vehicle_data.AFS = AFS_param();
 %% controller parameter
 m = vehicle_data.vehicle.m;
 a = vehicle_data.vehicle.Lf;
@@ -44,39 +49,37 @@ g = vehicle_data.vehicle.g;
 Caf = vehicle_data.front_suspension.Ks_f ;
 Car = vehicle_data.rear_suspension.Ks_r;
 
-%%
-model_name_no_controll = ['no_cntroller_sim'];
-model_no_controll = sim(model_name_no_controll);
-%%
-model_name_AFS = ['AFS_sim'];
-% openSimulinkFile([model_name_AFS , '.slx'])
-model_AFS = sim( model_name_AFS );
 
-%%
-model_name_ESP = ['ESP_sim'];
-model_ESP = sim(model_name_ESP);
-%%
+%% Simulation
+% ESP + AFS
+AFS_flag = 1; 
+ESP_flag = 1;
+model_sim = sim("ESP_sim.slx");
+comb_data = model_sim.ESP;
 
-yaw_rate_AFS = model_AFS.AFS_sim.BdyFrm.Cg.AngVel.r.Data;
-yaw_rate_ESP = model_ESP.ESP.BdyFrm.Cg.AngVel.r.Data;
-yaw_rate_no_controll = model_no_controll.no_controller.BdyFrm.Cg.AngVel.r.Data;
+% ESP
+AFS_flag = 0; 
+ESP_flag = 1;
+model_sim = sim("ESP_sim.slx");
+ESP_data = model_sim.ESP;
 
-length(yaw_rate_AFS)
-length(yaw_rate_ESP)
-length(yaw_rate_no_controll)
+% AFS
+AFS_flag = 1; 
+ESP_flag = 0;
+model_sim = sim("ESP_sim.slx");
+AFS_data = model_sim.ESP;
+
+% No Controller
+AFS_flag = 0; 
+ESP_flag = 0;
+model_sim = sim("ESP_sim.slx");
+NC_data = model_sim.ESP;
+
+clc
+fprintf('Simulation complete.\n');
 
 
-%%
-
-time = linspace(0,30);
-figure('Name','Yaw_rate')
-plot(yaw_rate_no_controll , 'DisplayName', 'No controller' , 'LineWidth', 1 ,'LineStyle','--')
-hold on
-plot(yaw_rate_ESP , 'DisplayName', 'ESP' , 'LineStyle','-.' , 'LineWidth', 1)
-hold on
-plot(yaw_rate_AFS , 'DisplayName', ' AFS' , 'LineStyle',':' , 'LineWidth', 1)
-hold on
-legend
-ylabel('Yaw rate [rad/s]')
+%% Data Analysis
+Data_analysis_ashkan;
 
 
