@@ -104,6 +104,8 @@ plot(cond_test , 1-rho_c , 'DisplayName' , '1-Rho_c' , 'LineStyle', '--' , 'Line
 hold on
 legend
 grid on
+xlabel('$\kappa_{1} \dot{\beta} + \kappa_{2} \beta$')
+ylabel('$\rho_{c}$')
 
 
 %% trajectory
