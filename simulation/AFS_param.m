@@ -1,13 +1,13 @@
 function AFS_param = AFS_param()
     
     X       = 0;  % controller gain
-    lambda  =0.7;  % positive constant
+    lambda  = 50;  % positive constant
     ro      = 1;
     mu      = 0.9;
-    k1      = 50;
-    k2      = 100;
-    B1      = 25;
-    B2      = 50;
+    k1      = 100;
+    k2      = 50;
+    B1      = 34;
+    B2      = 70;
 
     AFS_param.X          = X;
     AFS_param.lambda     = lambda;
