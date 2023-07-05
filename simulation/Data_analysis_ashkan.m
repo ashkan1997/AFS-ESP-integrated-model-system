@@ -37,22 +37,24 @@ time = model_sim.tout;
 
 
 %% Yaw rate
-figure( 'Name','Yaw rate')
+figure( 'Name','Yaw rate', 'PaperSize',[125 125])
 plot(time , r_NC , 'LineWidth', 1.5 , LineStyle='-.' ,DisplayName='No Controller')
 hold on
 plot(time , r_AFS , 'LineWidth', 1.5 , LineStyle='--' ,DisplayName='AFS')
 hold on
-plot(time , r_comb , 'LineWidth', 2 , 'DisplayName', ' AFS + ESP' , 'LineStyle','-' , 'Color', 'green')
+plot(time , r_comb , 'LineWidth', 2 , 'DisplayName', ' AFS + ESP' , 'LineStyle','-' , 'Color', [0.518 0.635 0.286])
 hold on
 plot(time , r_ESP , 'LineWidth', 1.5 , LineStyle=':' ,DisplayName='ESP')
 hold on
-legend
-xlabel('Time', 'FontWeight','bold' , 'FontSize',25)
-ylabel('$\Omega$ [rad/s]', 'FontWeight','bold' , 'FontSize',25)
-grid on
+% fontsize(gca,33,"pixels")
+legend()
+xlabel('Time', 'FontWeight','bold')
+ylabel('$\Omega$ [rad/s]', 'FontWeight','bold')
 
+grid off
 fig = gcf;
-exportgraphics(fig,['figure/' scenario_name '_Omega.eps']);
+
+% exportgraphics(fig,['figure/' scenario_name '_Omega.eps']);
 % annotation("textbox" , 'String', {['k1= ' , num2str(vehicle_data.AFS.k1)] ...
 %                                 ['k2= ' , num2str(vehicle_data.AFS.k2)] ...
 %                                 ['B1= ' , num2str(vehicle_data.AFS.B1)] ...
@@ -70,7 +72,7 @@ plot(time , beta_NC , 'LineWidth', 1 , LineStyle='-.' ,DisplayName='No Controlle
 hold on
 plot(time , beta_AFS , 'LineWidth', 1.1 , LineStyle='--' ,DisplayName='AFS')
 hold on
-plot(time , beta_comb , 'LineWidth', 1.5 , 'DisplayName', ' AFS + ESP' , 'LineStyle','-' , 'Color', 'green')
+plot(time , beta_comb , 'LineWidth', 1.5 , 'DisplayName', ' AFS + ESP' , 'LineStyle','-' , 'Color',  [0.518 0.635 0.286])
 hold on
 plot(time , beta_ESP , 'LineWidth', 1 , LineStyle=':' ,DisplayName='ESP')
 hold on

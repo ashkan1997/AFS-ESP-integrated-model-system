@@ -11,12 +11,12 @@ open_simulink_model;
 %% Input data
 
 V0 = 27.7;               % Initial velocity for HIGH friction    [m/s]
-% V0 = 14.0;               % Initial velocity for LOW friction     [m/s]
+% V0 = 14.6;               % Initial velocity for LOW friction     [m/s]
 
 
-[scenario_name , input] = scenario1(V0);        % Sine wave with High friction
+% [scenario_name , input] = scenario1(V0);        % Sine wave with High friction
 % [scenario_name , input] = scenario2(V0);        % Sine wave with low friction
-% [scenario_name , input] = scenario3(V0);        % Step wave with High friction
+[scenario_name , input] = scenario3(V0);        % Step wave with High friction
 % [scenario_name , input] = scenario4(V0);        % Step wave with low friction
     
 Tf = 30;
