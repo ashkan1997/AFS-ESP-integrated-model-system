@@ -107,7 +107,7 @@ grid on
 xlabel('$\kappa_{1} \dot{\beta} + \kappa_{2} \beta$' , 'FontWeight','bold' , 'FontSize',25)
 ylabel('$\rho_{c}$', 'FontWeight','bold' , 'FontSize',25)
 fig = gcf;
-exportgraphics(fig,['figure/' scenario_name '_Activation_Fun.eps']);
+exportgraphics(fig,['figure/' scenario_name '_beta.eps']);
 
 
 %% trajectory

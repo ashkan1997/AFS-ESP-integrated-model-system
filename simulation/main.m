@@ -10,14 +10,13 @@ open_simulink_model;
 
 %% Input data
 
-% V0 for high friction is 27.7 m/s
-% and for low friction is 14 m/s
-V0 = 27.0;               % Initial velocity    [m/s]
+V0 = 27.7;               % Initial velocity for HIGH friction    [m/s]
+% V0 = 14.0;               % Initial velocity for LOW friction     [m/s]
 
 
-% [scenario_name , input] = scenario1(V0);        % Sine wave with High friction
+[scenario_name , input] = scenario1(V0);        % Sine wave with High friction
 % [scenario_name , input] = scenario2(V0);        % Sine wave with low friction
-[scenario_name , input] = scenario3(V0);        % Step wave with High friction
+% [scenario_name , input] = scenario3(V0);        % Step wave with High friction
 % [scenario_name , input] = scenario4(V0);        % Step wave with low friction
     
 Tf = 30;
@@ -51,6 +50,16 @@ Car = vehicle_data.rear_suspension.Ks_r;
 
 
 %% Simulation
+
+% No Controller
+AFS_flag = 0; 
+ESP_flag = 0;
+model_sim = sim("ESP_sim.slx");
+NC_data = model_sim.ESP;
+% beta_dot = model_sim.beta_dot.Data;
+% beta = model_sim.ESP.BdyFrm.Cg.Ang.Beta.Data;
+modif_AFS;
+
 % ESP + AFS
 AFS_flag = 1; 
 ESP_flag = 1;
@@ -68,12 +77,6 @@ AFS_flag = 1;
 ESP_flag = 0;
 model_sim = sim("ESP_sim.slx");
 AFS_data = model_sim.ESP;
-
-% No Controller
-AFS_flag = 0; 
-ESP_flag = 0;
-model_sim = sim("ESP_sim.slx");
-NC_data = model_sim.ESP;
 
 clc
 fprintf('Simulation complete.\n');
